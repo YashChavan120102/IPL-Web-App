@@ -56,7 +56,8 @@ def venue_toss_list(df):
     return toss,venue
 
 def team_wins(df):
-    df_wins = df['winner'].value_counts().reset_index()
+    # Drop any rows where winner is NaN
+    df_wins = df['winner'].dropna().value_counts().reset_index()
     df_wins.columns = ['team', 'wins']
     return df_wins
 
