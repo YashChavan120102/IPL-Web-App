@@ -62,16 +62,16 @@ if user_menu == 'Overall Analysis':
     team_wins = helper.team_wins(df)
 
 # Debug line to check the DataFrame
-st.write("DEBUG: team_wins DataFrame")
+team_wins = helper.team_wins(df)
+
+# Debug output to verify columns
+st.write("Columns in team_wins:", team_wins.columns.tolist())
 st.dataframe(team_wins)
 
-# Safely plot only if data is valid
 if team_wins is not None and not team_wins.empty:
     st.title("Team Wins")
-    fig = px.bar(team_wins, x="team", y="wins", width=1000, height=500, color="team", pattern_shape="team")
-    fig.update_layout(
-        margin=dict(l=0, r=0, t=0, b=0)
-    )
+    fig = px.bar(team_wins, x="team", y="wins", width=1000, height=500, color="team")
+    fig.update_layout(margin=dict(l=0, r=0, t=0, b=0))
     st.plotly_chart(fig)
 else:
     st.warning("No team win data available to display.")
