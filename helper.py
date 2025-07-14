@@ -56,9 +56,9 @@ def venue_toss_list(df):
     return toss,venue
 
 def team_wins(df):
-    team_wins = df['winner'].value_counts().reset_index()
-    team_wins1 = team_wins.rename(columns={'index': 'Team', 'winner': 'No of Wins'})
-    return team_wins1
+    df_wins = df['winner'].value_counts().reset_index()
+    df_wins.columns = ['team', 'wins']
+    return df_wins
 
 def city_matches(df):
     city_matches = df['city'].value_counts().reset_index()
