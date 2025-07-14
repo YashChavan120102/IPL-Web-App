@@ -60,12 +60,21 @@ if user_menu == 'Overall Analysis':
     st.text("     ")
     st.text("     ")
     team_wins = helper.team_wins(df)
-    fig = px.bar(team_wins, x="Team", y="No of Wins",width=1000,height=500,color="Team", pattern_shape="Team")
+
+# Debug line to check the DataFrame
+st.write("DEBUG: team_wins DataFrame")
+st.dataframe(team_wins)
+
+# Safely plot only if data is valid
+if team_wins is not None and not team_wins.empty:
     st.title("Team Wins")
+    fig = px.bar(team_wins, x="team", y="wins", width=1000, height=500, color="team", pattern_shape="team")
     fig.update_layout(
         margin=dict(l=0, r=0, t=0, b=0)
     )
     st.plotly_chart(fig)
+else:
+    st.warning("No team win data available to display.")
 
     st.text("     ")
     city_matches = helper.city_matches(df)
